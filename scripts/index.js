@@ -70,7 +70,7 @@ function GameOver(){
 
 
 let gameOver = false, score = 0;
-const row = 10, col = 10, mines = 1;
+const row = 10, col = 10, mines = 25;
 let arr = InitializeGameArray();
 
 
