@@ -1,0 +1,91 @@
+body{
+    background-color: rgb(113, 113, 113);
+    display: flex;
+    justify-content: center;
+    user-select: none;
+    -moz-user-select: none;
+}
+
+.game{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: calc(fit-content);
+    background-color: rgb(186, 186, 186);
+    width: fit-content;
+    padding: 10px;
+    gap: 5px;
+    box-shadow: inset 2px 2px rgb(255, 255, 255),
+                inset -2px -2px rgb(124, 124, 124);
+}
+
+.score{
+    height: 60px;
+    width: 100%;
+
+    box-shadow: inset 2px 2px rgb(124, 124, 124),
+                inset -2px -2px rgb(255, 255, 255) ;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
+}
+
+.mineCounter{
+    background-color: rgb(74, 7, 0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 38px;
+    color: red;
+    height: 40px;
+    width: 70px;
+    margin-left: 10px;
+}
+.timer{
+    background-color: rgb(83, 0, 0);
+    height: 40px;
+    width: 70px;
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 38px;
+    color: red;
+}
+
+.grid{
+    display: grid;
+    justify-content: center;
+    height: fit-content;
+    box-shadow: inset 2px 2px rgb(124, 124, 124),
+                inset -2px -2px rgb(255, 255, 255) ;
+    padding: 2px;
+}
+
+.box{
+    height: 20px;
+    width: 20px;
+    background-color: rgb(186, 186, 186);
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    font-size: 0;
+    box-shadow: inset 2px 2px  rgb(255, 255, 255),
+                inset -2px -2px rgb(124, 124, 124);
+    padding: 1px;
+}
+
+.flag{
+    background-color: rgb(186, 186, 186);
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 25px;
+    width: 25px;
+    box-shadow: inset 2px 2px  rgb(255, 255, 255),
+                inset -2px -2px rgb(124, 124, 124);
+    padding: 1px;          
+}
