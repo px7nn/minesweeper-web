@@ -42,6 +42,7 @@ body{
     align-items: center;
     justify-content: center;
     font-size: 38px;
+    font-family: monospace;
     color: red;
     height: 40px;
     width: 70px;
@@ -56,6 +57,7 @@ body{
     align-items: center;
     justify-content: center;
     font-size: 38px;
+    font-family: monospace;
     color: red;
 }
 
