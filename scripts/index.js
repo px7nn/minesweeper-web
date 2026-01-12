@@ -8,7 +8,11 @@ function Game(){
     function Reveal(box){
         if(box.classList.contains("revealed")) return;
         if(!box.classList.contains("bomb")) {// ‼️WIN Condn
-            ++score; 
+            ++revealed; 
+            if(row*col - mines === revealed){
+                document.querySelector('.restart').innerHTML = "🥳";
+                StopTimer();
+            }
         }
         box.classList.add("revealed");
         box.style.boxShadow = "none";   
@@ -65,13 +69,14 @@ function Game(){
     }
     function GameOver(){
         RevealAllBomb(); StopTimer();
+        document.querySelector('.restart').innerHTML = "😵";
         gameOver = true;
     }
 
 
 
-    let gameOver = false, score = 0;
-    const row = 10, col = 10, mines = 25;
+    let gameOver = false, revealed = 0, score = 0;
+    const row = 9, col = 9, mines = 10;
     let arr = InitializeGameArray();
 
 
@@ -139,6 +144,7 @@ function Game(){
         if(time>999)
             StopTimer();
         document.querySelector('.timer').innerHTML = String(time).padStart(3, '0');
+        score = time;
         time++;
     }
     function StopTimer(){
@@ -178,7 +184,7 @@ function Game(){
         mineCounter.innerHTML = String(mC).padStart(3, '0');
     } UpdateCounter();
 
-        document.querySelector('.restart').addEventListener("mouseup", () =>{
+    document.querySelector('.restart').addEventListener("mouseup", () =>{
         location.reload();
     });
 } Game();
