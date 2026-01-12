@@ -164,6 +164,7 @@ function Game(){
         if(box.classList.contains("flagged")){
             box.classList.remove("flagged");
             box.style.backgroundColor = "rgb(186, 186, 186)"
+            mC++; UpdateCounter();
         } else {
             box.classList.add("flagged");
             box.style.backgroundColor = "red";
