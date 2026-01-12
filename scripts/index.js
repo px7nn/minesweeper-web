@@ -10,8 +10,7 @@ function Game(){
         if(!box.classList.contains("bomb")) {// ‼️WIN Condn
             ++revealed; 
             if(row*col - mines === revealed){
-                document.querySelector('.restart').innerHTML = "🥳";
-                StopTimer();
+                GameWon();
             }
         }
         box.classList.add("revealed");
@@ -67,9 +66,17 @@ function Game(){
                         queue.push([x,y]);
         }
     }
+    function GameWon(){
+        document.querySelector('.stats-restart').innerHTML = "🥳";
+        StopTimer();
+        DisplayStats();
+        document.querySelector('.stats-score').innerHTML = "Time: "+score;
+    }
     function GameOver(){
         RevealAllBomb(); StopTimer();
-        document.querySelector('.restart').innerHTML = "😵";
+        DisplayStats();
+        document.querySelector('.stats-score').innerHTML = "Game Lost!";
+        document.querySelector('.stats-restart').innerHTML = "😵";
         gameOver = true;
     }
 
@@ -155,7 +162,6 @@ function Game(){
     const flag = document.querySelector('.flag');
     let flagEnabled = false;
     flag.addEventListener('mouseup', ToggleFlag)
-
     function ToggleFlag(){
         if(gameOver) return;
         flagEnabled = !flagEnabled;
@@ -187,4 +193,12 @@ function Game(){
     document.querySelector('.restart').addEventListener("mouseup", () =>{
         location.reload();
     });
+    document.querySelector('.stats-restart').addEventListener("mouseup", () =>{
+        location.reload();
+    });
+
+    const statsScreen = document.querySelector('.stats-screen')
+    function DisplayStats(){
+        statsScreen.style.zIndex = "1";
+    }
 } Game();

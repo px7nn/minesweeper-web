@@ -97,7 +97,7 @@ body{
     padding: 1px;          
 }
 
-.restart{
+.restart, .stats-restart{
     background-color: rgb(186, 186, 186);
     font-size: 15px;
     display: flex;
@@ -114,4 +114,46 @@ body{
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.stats-screen{
+    position: absolute;
+    background-color: rgb(83, 0, 0);
+    height: 60px;
+    width: 202px;
+    box-shadow: inset 2px 2px rgb(124, 124, 124),
+                inset -2px -2px rgb(255, 255, 255);
+    z-index: -1;
+    color: red;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+.stats-score {
+    margin-left: 10px;
+}
+.leaderboard{
+    display: flex;
+    flex-direction: column;
+    margin-right: 10px;
+    height: calc(100% - 5px);
+    width: 90px;
+    overflow: hidden;
+}
+.heading{
+    font-size: 10px;
+    text-align: center;
+}
+.top{
+    font-size: 12px;
+}
+.stats-left{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.stats-left .restart{
+    margin-left: 8px;
 }
