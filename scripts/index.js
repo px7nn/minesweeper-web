@@ -1,178 +1,183 @@
-function GetRandomNumber(min, max){
-    return Math.floor(Math.random() * (max - min) + min);
-}
-function IsBomb(n){
-    return n===-1;
-}
-function Reveal(box){
-    if(box.classList.contains("revealed")) return;
-    if(!box.classList.contains("bomb")) {// ‼️WIN Condn
-        ++score; 
+function Game(){
+    function GetRandomNumber(min, max){
+        return Math.floor(Math.random() * (max - min) + min);
     }
-    box.classList.add("revealed");
-    box.style.boxShadow = "none";   
-    box.style.backgroundColor = "rgba(165, 165, 165, 1)";
-    box.style.fontSize = "100%";
-    box.style.outline = "0.5px solid rgba(124, 124, 124, 1)";
-}
-function RevealAllBomb(){
-    document.querySelectorAll('.bomb').forEach(Reveal);
-}
-function InitializeGameArray(){
-    return Array(row).fill().map(()=>Array(col).fill(0));   
-};
-function PlaceBombs(safeI, safeJ){
-    let placed = 0;
-    while(placed < mines){
-        let I = GetRandomNumber(0, row);
-        let J = GetRandomNumber(0, col);
-        if((I === safeI && J === safeJ) || arr[I][J] == -1) 
-            continue;
-        if(Math.abs(I - safeI) <= 1 && Math.abs(J - safeJ) <= 1) continue;
-        placed++;
-        arr[I][J] = -1;
+    function IsBomb(n){
+        return n===-1;
     }
-    for(let i=0;i<row;i++)
-        for(let j=0;j<col;j++)
-            if(arr[i][j] !== -1)
-                for(let x=i-1;x<=i+1;x++)
-                    for(let y=j-1;y<=j+1;y++)
-                        if(x>=0 && x<row && y>=0 && y<col && arr[x][y] === -1)
-                            arr[i][j]++;
-    
-}
-function BFSReveal(startI, startJ){
-    const queue = [[startI, startJ]];
-    const visited = Array(row).fill().map(() => Array(col).fill(false));
-
-    while(queue.length){
-        const [i, j] = queue.shift();
-        if(visited[i][j]) continue;
-        visited[i][j] = true;
-
-        const box = document.querySelector(`#b${i}_${j}`);
-        if(box.classList.contains("flagged")) continue;
-        Reveal(box);
-
-        if(arr[i][j] !== 0) continue;
-
-        for(let x=i-1;x<=i+1;x++)
-            for(let y=j-1;y<=j+1;y++)
-                if(x>=0 && x<row && y>=0 && y<col && !visited[x][y])
-                    queue.push([x,y]);
-    }
-}
-function GameOver(){
-    RevealAllBomb(); StopTimer();
-    gameOver = true;
-}
-
-
-
-let gameOver = false, score = 0;
-const row = 10, col = 10, mines = 25;
-let arr = InitializeGameArray();
-
-
-const grid = document.querySelector('.grid');
-grid.style.gridTemplateColumns = `repeat(${col}, 1fr)`;
-
-let firstT = true, time = 0, timerID = null;
-
-function CreateGame(grid){
-    grid.innerHTML = "";
-    for(let i=0; i<row; i++)
-        for(let j=0; j<col; j++){
-            const box = document.createElement('div');
-            box.className = 'box';
-            box.id = `b${i}_${j}`;
-            
-            if(IsBomb(arr[i][j])){
-                box.classList.add("bomb");
-                box.innerHTML = "💣";
-            }
-            else if(arr[i][j] != 0)
-                box.innerHTML = arr[i][j];
-            switch(arr[i][j]){
-                case 1: box.style.color = "#0000FF"; break;
-                case 2: box.style.color = "#008000"; break;
-                case 3: box.style.color = "#FF0000"; break;
-                case 4: box.style.color = "#000080"; break;
-                case 5: box.style.color = "#800000"; break;
-                case 6: box.style.color = "#008080"; break;
-                case 7: box.style.color = "#000000"; break;
-                case 8: box.style.color = "#808080"; break;
-            }
-            box.addEventListener("mouseup", () => {
-                if(gameOver) return;
-                if(flagEnabled) {
-                    HandleFlag(box); return;
-                }
-                if(box.classList.contains("flagged")) return;
-                if(firstT){
-                    firstT = false;
-                    PlaceBombs(i, j);
-                    CreateGame(grid); 
-                    BFSReveal(i, j);
-                    StartTimer();
-                    timerID = setInterval(StartTimer, 1000);
-                    return;
-                }
-                if(IsBomb(arr[i][j])){
-                    Reveal(box);
-                    GameOver();
-                }
-                else if(arr[i][j]===0)
-                    BFSReveal(i, j);
-                else{
-                    Reveal(box);
-                }
-            });
-            grid.appendChild(box);
+    function Reveal(box){
+        if(box.classList.contains("revealed")) return;
+        if(!box.classList.contains("bomb")) {// ‼️WIN Condn
+            ++score; 
         }
-} CreateGame(grid);
-console.log(arr);
-
-
-/* TIMER */
-function StartTimer(){
-    if(time>999)
-        StopTimer();
-    document.querySelector('.timer').innerHTML = String(time).padStart(3, '0');
-    time++;
-}
-function StopTimer(){
-    clearInterval(timerID);
-}
-
-
-const flag = document.querySelector('.flag');
-let flagEnabled = false;
-flag.addEventListener('mouseup', ToggleFlag)
-
-function ToggleFlag(){
-    if(gameOver) return;
-    flagEnabled = !flagEnabled;
-    if(!flagEnabled)
-        flag.style.backgroundColor = "rgb(186, 186, 186)";
-    else
-        flag.style.backgroundColor = "red";
-}
-function HandleFlag(box){
-    if(gameOver) return;
-    if(box.classList.contains("revealed")) return ;
-    if(box.classList.contains("flagged")){
-        box.classList.remove("flagged");
-        box.style.backgroundColor = "rgb(186, 186, 186)"
-    } else {
-        box.classList.add("flagged");
-        box.style.backgroundColor = "red";
-        mC--; UpdateCounter();
+        box.classList.add("revealed");
+        box.style.boxShadow = "none";   
+        box.style.backgroundColor = "rgba(165, 165, 165, 1)";
+        box.style.fontSize = "100%";
+        box.style.outline = "0.5px solid rgba(124, 124, 124, 1)";
     }
-}
+    function RevealAllBomb(){
+        document.querySelectorAll('.bomb').forEach(Reveal);
+    }
+    function InitializeGameArray(){
+        return Array(row).fill().map(()=>Array(col).fill(0));   
+    };
+    function PlaceBombs(safeI, safeJ){
+        let placed = 0;
+        while(placed < mines){
+            let I = GetRandomNumber(0, row);
+            let J = GetRandomNumber(0, col);
+            if((I === safeI && J === safeJ) || arr[I][J] == -1) 
+                continue;
+            if(Math.abs(I - safeI) <= 1 && Math.abs(J - safeJ) <= 1) continue;
+            placed++;
+            arr[I][J] = -1;
+        }
+        for(let i=0;i<row;i++)
+            for(let j=0;j<col;j++)
+                if(arr[i][j] !== -1)
+                    for(let x=i-1;x<=i+1;x++)
+                        for(let y=j-1;y<=j+1;y++)
+                            if(x>=0 && x<row && y>=0 && y<col && arr[x][y] === -1)
+                                arr[i][j]++;
 
-const mineCounter = document.querySelector('.mineCounter');
-let mC = mines;
-function UpdateCounter(){
-    mineCounter.innerHTML = String(mC).padStart(3, '0');
-} UpdateCounter();
+    }
+    function BFSReveal(startI, startJ){
+        const queue = [[startI, startJ]];
+        const visited = Array(row).fill().map(() => Array(col).fill(false));
+
+        while(queue.length){
+            const [i, j] = queue.shift();
+            if(visited[i][j]) continue;
+            visited[i][j] = true;
+
+            const box = document.querySelector(`#b${i}_${j}`);
+            if(box.classList.contains("flagged")) continue;
+            Reveal(box);
+
+            if(arr[i][j] !== 0) continue;
+
+            for(let x=i-1;x<=i+1;x++)
+                for(let y=j-1;y<=j+1;y++)
+                    if(x>=0 && x<row && y>=0 && y<col && !visited[x][y])
+                        queue.push([x,y]);
+        }
+    }
+    function GameOver(){
+        RevealAllBomb(); StopTimer();
+        gameOver = true;
+    }
+
+
+
+    let gameOver = false, score = 0;
+    const row = 10, col = 10, mines = 25;
+    let arr = InitializeGameArray();
+
+
+    const grid = document.querySelector('.grid');
+    grid.style.gridTemplateColumns = `repeat(${col}, 1fr)`;
+
+    let firstT = true, time = 0, timerID = null;
+
+    function CreateGame(grid){
+        grid.innerHTML = "";
+        for(let i=0; i<row; i++)
+            for(let j=0; j<col; j++){
+                const box = document.createElement('div');
+                box.className = 'box';
+                box.id = `b${i}_${j}`;
+
+                if(IsBomb(arr[i][j])){
+                    box.classList.add("bomb");
+                    box.innerHTML = "💣";
+                }
+                else if(arr[i][j] != 0)
+                    box.innerHTML = arr[i][j];
+                switch(arr[i][j]){
+                    case 1: box.style.color = "#0000FF"; break;
+                    case 2: box.style.color = "#008000"; break;
+                    case 3: box.style.color = "#FF0000"; break;
+                    case 4: box.style.color = "#000080"; break;
+                    case 5: box.style.color = "#800000"; break;
+                    case 6: box.style.color = "#008080"; break;
+                    case 7: box.style.color = "#000000"; break;
+                    case 8: box.style.color = "#808080"; break;
+                }
+                box.addEventListener("mouseup", () => {
+                    if(gameOver) return;
+                    if(flagEnabled) {
+                        HandleFlag(box); return;
+                    }
+                    if(box.classList.contains("flagged")) return;
+                    if(firstT){
+                        firstT = false;
+                        PlaceBombs(i, j);
+                        CreateGame(grid); 
+                        BFSReveal(i, j);
+                        StartTimer();
+                        timerID = setInterval(StartTimer, 1000);
+                        return;
+                    }
+                    if(IsBomb(arr[i][j])){
+                        Reveal(box);
+                        GameOver();
+                    }
+                    else if(arr[i][j]===0)
+                        BFSReveal(i, j);
+                    else{
+                        Reveal(box);
+                    }
+                });
+                grid.appendChild(box);
+            }
+    } CreateGame(grid);
+
+
+    /* TIMER */
+    function StartTimer(){
+        if(time>999)
+            StopTimer();
+        document.querySelector('.timer').innerHTML = String(time).padStart(3, '0');
+        time++;
+    }
+    function StopTimer(){
+        clearInterval(timerID);
+    }
+
+
+    const flag = document.querySelector('.flag');
+    let flagEnabled = false;
+    flag.addEventListener('mouseup', ToggleFlag)
+
+    function ToggleFlag(){
+        if(gameOver) return;
+        flagEnabled = !flagEnabled;
+        if(!flagEnabled)
+            flag.style.backgroundColor = "rgb(186, 186, 186)";
+        else
+            flag.style.backgroundColor = "red";
+    }
+    function HandleFlag(box){
+        if(gameOver) return;
+        if(box.classList.contains("revealed")) return ;
+        if(box.classList.contains("flagged")){
+            box.classList.remove("flagged");
+            box.style.backgroundColor = "rgb(186, 186, 186)"
+        } else {
+            box.classList.add("flagged");
+            box.style.backgroundColor = "red";
+            mC--; UpdateCounter();
+        }
+    }
+
+    const mineCounter = document.querySelector('.mineCounter');
+    let mC = mines;
+    function UpdateCounter(){
+        mineCounter.innerHTML = String(mC).padStart(3, '0');
+    } UpdateCounter();
+
+        document.querySelector('.restart').addEventListener("mouseup", () =>{
+        location.reload();
+    });
+} Game();

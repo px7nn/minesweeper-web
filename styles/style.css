@@ -2,6 +2,8 @@ body{
     background-color: rgb(113, 113, 113);
     display: flex;
     justify-content: center;
+    align-items: center;
+    flex-direction: column;
     user-select: none;
     -moz-user-select: none;
 }
@@ -79,6 +81,20 @@ body{
 
 .flag{
     background-color: rgb(186, 186, 186);
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 30px;
+    width: 40px;
+    box-shadow: inset 2px 2px  rgb(255, 255, 255),
+                inset -2px -2px rgb(124, 124, 124);
+    margin: 2px;
+    padding: 1px;          
+}
+
+.restart{
+    background-color: rgb(186, 186, 186);
     font-size: 15px;
     display: flex;
     align-items: center;
@@ -87,5 +103,5 @@ body{
     width: 25px;
     box-shadow: inset 2px 2px  rgb(255, 255, 255),
                 inset -2px -2px rgb(124, 124, 124);
-    padding: 1px;          
+    padding: 1px; 
 }
