@@ -71,6 +71,7 @@ function Game(){
         StopTimer();
         DisplayStats();
         document.querySelector('.stats-score').innerHTML = "Time: "+score;
+        gameWon = true;
     }
     function GameOver(){
         RevealAllBomb(); StopTimer();
@@ -82,7 +83,7 @@ function Game(){
 
 
 
-    let gameOver = false, revealed = 0, score = 0;
+    let gameOver = false, gameWon = false,revealed = 0, score = 0;
     const row = 9, col = 9, mines = 10;
     let arr = InitializeGameArray();
 
@@ -117,7 +118,7 @@ function Game(){
                     case 8: box.style.color = "#808080"; break;
                 }
                 box.addEventListener("mouseup", () => {
-                    if(gameOver) return;
+                    if(gameOver || gameWon) return;
                     if(flagEnabled) {
                         HandleFlag(box); return;
                     }
@@ -163,7 +164,7 @@ function Game(){
     let flagEnabled = false;
     flag.addEventListener('mouseup', ToggleFlag)
     function ToggleFlag(){
-        if(gameOver) return;
+        if(gameOver || gameWon) return;
         flagEnabled = !flagEnabled;
         if(!flagEnabled)
             flag.style.backgroundColor = "rgb(186, 186, 186)";
