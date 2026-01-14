@@ -1,4 +1,4 @@
-function Game(){
+(function (){
     function GetRandomNumber(min, max){
         return Math.floor(Math.random() * (max - min) + min);
     }
@@ -225,4 +225,4 @@ function Game(){
         InitialState();
         CreateGame(grid);
     }
-} Game();
+})();
