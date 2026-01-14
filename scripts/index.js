@@ -80,18 +80,40 @@ function Game(){
         document.querySelector('.stats-restart').innerHTML = "😵";
         gameOver = true;
     }
+    function InitialState(){
+        if(flagEnabled)
+            ToggleFlag();
+        gameOver = gameWon = flagEnabled = false;
+        firstT = true;
+        revealed = score = time = 0
+        timerID = null;
+        row = 9, col = 9, mines = mC = 10;
+        arr = InitializeGameArray();
 
+        UpdateCounter();
+        statsScreen.style.zIndex = "-1";
+        document.querySelector('.timer').innerHTML = String(time).padStart(3, '0');
+    }
 
-
-    let gameOver = false, gameWon = false,revealed = 0, score = 0;
-    const row = 9, col = 9, mines = 10;
-    let arr = InitializeGameArray();
-
-
+    /*🕯️🍂📜 - - ‼️‼️ - - ‼️‼️ - - ‼️‼️ - - 📜🍂🕯️*/
     const grid = document.querySelector('.grid');
-    grid.style.gridTemplateColumns = `repeat(${col}, 1fr)`;
+    const flag = document.querySelector('.flag');
+    const mineCounter = document.querySelector('.mineCounter');
+    const statsScreen = document.querySelector('.stats-screen');
 
-    let firstT = true, time = 0, timerID = null;
+    let gameOver, gameWon, firstT, flagEnabled;
+    let revealed, score, time;
+    let timerID;
+
+    let row, col, mines, arr;
+    InitialState();
+
+    grid.style.gridTemplateColumns = `repeat(${col}, 1fr)`;
+    flag.addEventListener('mouseup', ToggleFlag);
+    
+    CreateGame(grid);
+
+    /*🕯️🍂📜 - - ‼️‼️ - - ‼️‼️ - - ‼️‼️ - - 📜🍂🕯️*/
 
     function CreateGame(grid){
         grid.innerHTML = "";
@@ -144,7 +166,7 @@ function Game(){
                 });
                 grid.appendChild(box);
             }
-    } CreateGame(grid);
+    }
 
 
     /* TIMER */
@@ -160,11 +182,9 @@ function Game(){
     }
 
 
-    const flag = document.querySelector('.flag');
-    let flagEnabled = false;
-    flag.addEventListener('mouseup', ToggleFlag)
+    
     function ToggleFlag(){
-        if(gameOver || gameWon) return;
+        if(gameOver || gameWon || firstT) return;
         flagEnabled = !flagEnabled;
         if(!flagEnabled)
             flag.style.backgroundColor = "rgb(186, 186, 186)";
@@ -172,7 +192,7 @@ function Game(){
             flag.style.backgroundColor = "red";
     }
     function HandleFlag(box){
-        if(gameOver) return;
+        if(gameOver || gameWon || firstT) return;
         if(box.classList.contains("revealed")) return ;
         if(box.classList.contains("flagged")){
             box.classList.remove("flagged");
@@ -185,21 +205,24 @@ function Game(){
         }
     }
 
-    const mineCounter = document.querySelector('.mineCounter');
-    let mC = mines;
+    
     function UpdateCounter(){
         mineCounter.innerHTML = String(mC).padStart(3, '0');
     } UpdateCounter();
 
     document.querySelector('.restart').addEventListener("mouseup", () =>{
-        location.reload();
+        Restart();
     });
     document.querySelector('.stats-restart').addEventListener("mouseup", () =>{
-        location.reload();
+        Restart();
     });
 
-    const statsScreen = document.querySelector('.stats-screen')
     function DisplayStats(){
         statsScreen.style.zIndex = "1";
+    }
+    function Restart(){
+        clearInterval(timerID);
+        InitialState();
+        CreateGame(grid);
     }
 } Game();
