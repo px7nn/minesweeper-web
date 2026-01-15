@@ -93,8 +93,8 @@ body{
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     /* box-shadow: inset 2px 2px  rgb(255, 255, 255),
                 inset -2px -2px rgb(124, 124, 124); */
-    box-shadow: inset 2px 2px  #707880,
-                inset -2px -2px #222a32;
+    box-shadow: inset 2.5px 2.5px  #788088,
+                inset -2.5px -2.5px #1e262e;
     padding: 2px;
 }
 
