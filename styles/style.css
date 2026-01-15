@@ -1,5 +1,6 @@
 body{
-    background-color: rgb(113, 113, 113);
+    /* background-color: rgb(113, 113, 113); */
+    background-color: #181a1b;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -16,40 +17,46 @@ body{
     align-items: center;
     justify-content: center;
     height: calc(fit-content);
-    background-color: rgb(186, 186, 186);
+    /* background-color: rgb(186, 186, 186); */
+    background-color: #464e56;
     width: fit-content;
     padding: 10px;
     gap: 5px;
-    box-shadow: inset 2px 2px rgb(255, 255, 255),
-                inset -2px -2px rgb(124, 124, 124);
+    /* box-shadow: inset 2px 2px rgb(170, 3, 3),
+                inset -2px -2px rgb(124, 124, 124); */
+    box-shadow: inset 4px 4px #788088,
+                inset -3px -3px #1e262e;
 }
 
 .score{
     height: 60px;
     width: 100%;
 
-    box-shadow: inset 2px 2px rgb(124, 124, 124),
-                inset -2px -2px rgb(255, 255, 255) ;
+    /* box-shadow: inset 2px 2px rgb(124, 124, 124),
+                inset -2px -2px rgb(255, 255, 255) ; */
+    box-shadow: inset 3px 3px #1e262e,
+                inset -3px -3px #788088;
     display: flex;
     justify-content: space-between;
     flex-direction: row;
     align-items: center;
+    position: relative;
 }
 
 .mineCounter{
-    background-color: rgb(74, 7, 0);
+    background-color: rgb(0, 0, 0);
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 38px;
     font-family: monospace;
-    color: red;
+    color: #cc0000;
     height: 40px;
     width: 70px;
     margin-left: 10px;
 }
 .timer{
-    background-color: rgb(83, 0, 0);
+    background-color: rgb(0, 0, 0);
     height: 40px;
     width: 70px;
     margin-right: 10px;
@@ -58,55 +65,69 @@ body{
     justify-content: center;
     font-size: 38px;
     font-family: monospace;
-    color: red;
+    color: #cc0000;
 }
 
 .grid{
     display: grid;
     justify-content: center;
+    align-items: center;
     height: fit-content;
-    box-shadow: inset 2px 2px rgb(124, 124, 124),
-                inset -2px -2px rgb(255, 255, 255) ;
-    padding: 2px;
+    /* box-shadow: inset 2px 2px rgb(124, 124, 124),
+                inset -2px -2px rgb(255, 255, 255) ; */
+    box-shadow: inset 3px 3px #1e262e,
+                inset -3px -3px #788088;
+    padding: 3px;
+    overflow: hidden;
 }
 
 .box{
-    height: 20px;
-    width: 20px;
-    background-color: rgb(186, 186, 186);
+    height: 27px;
+    width: 27px;
+    /* background-color: rgb(186, 186, 186); */
+    background-color: #4c545c;
     display: flex;
     justify-content: center;
     align-items: center; 
     font-size: 0;
-    box-shadow: inset 2px 2px  rgb(255, 255, 255),
-                inset -2px -2px rgb(124, 124, 124);
-    padding: 1px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    /* box-shadow: inset 2px 2px  rgb(255, 255, 255),
+                inset -2px -2px rgb(124, 124, 124); */
+    box-shadow: inset 2px 2px  #707880,
+                inset -2px -2px #222a32;
+    padding: 2px;
 }
 
 .flag{
-    background-color: rgb(186, 186, 186);
+    /* background-color: rgb(186, 186, 186); */
+    background-color: #4c545c;
     font-size: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
     height: 30px;
     width: 40px;
-    box-shadow: inset 2px 2px  rgb(255, 255, 255),
-                inset -2px -2px rgb(124, 124, 124);
+    /* box-shadow: inset 2px 2px  rgb(255, 255, 255),
+                inset -2px -2px rgb(124, 124, 124); */
+    box-shadow: inset 3px 3px  #707880,
+                inset -3px -3px #222a32;
     margin: 2px;
     padding: 1px;          
 }
 
 .restart, .stats-restart{
-    background-color: rgb(186, 186, 186);
+    /* background-color: rgb(186, 186, 186); */
+    background-color: #464e56;
     font-size: 15px;
     display: flex;
     align-items: center;
     justify-content: center;
     height: 25px;
-    width: 25px;
-    box-shadow: inset 2px 2px  rgb(255, 255, 255),
-                inset -2px -2px rgb(124, 124, 124);
+    width: 35px;
+    /* box-shadow: inset 2px 2px  rgb(255, 255, 255),
+                inset -2px -2px rgb(124, 124, 124); */
+    box-shadow: inset 3px 3px  #788088,
+                inset -3px -3px #1e262e;
     padding: 1px; 
 }
 
@@ -118,18 +139,22 @@ body{
 
 .stats-screen{
     position: absolute;
-    background-color: rgb(83, 0, 0);
-    height: 60px;
-    width: 202px;
-    box-shadow: inset 2px 2px rgb(124, 124, 124),
-                inset -2px -2px rgb(255, 255, 255);
+    background-color: rgb(0, 0, 0);
+    height: 100%;
+    width: 100%;
+    /* box-shadow: inset 2px 2px rgb(124, 124, 124),
+                inset -2px -2px rgb(255, 255, 255); */
+    box-shadow: inset 3px 3px #1e262e,
+                inset -3px -3px #788088;
     z-index: -1;
-    color: red;
+    color: #cc0000;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
 }
+
+
 .stats-score {
     margin-left: 10px;
 }
@@ -139,7 +164,11 @@ body{
     margin-right: 10px;
     height: calc(100% - 5px);
     width: 90px;
-    overflow: hidden;
+    overflow-y: scroll;
+}
+::-webkit-scrollbar{
+    background-color: #000;
+    width: 0px;
 }
 .heading{
     font-size: 10px;

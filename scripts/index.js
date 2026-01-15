@@ -15,9 +15,10 @@
         }
         box.classList.add("revealed");
         box.style.boxShadow = "none";   
-        box.style.backgroundColor = "rgba(165, 165, 165, 1)";
-        box.style.fontSize = "100%";
-        box.style.outline = "0.5px solid rgba(124, 124, 124, 1)";
+        // box.style.backgroundColor = "rgba(165, 165, 165, 1)";
+        box.style.backgroundColor = "#384048";
+        box.style.fontSize = "20px";
+        box.style.outline = "1px solid #1e262e";
     }
     function RevealAllBomb(){
         document.querySelectorAll('.bomb').forEach(Reveal);
@@ -130,14 +131,22 @@
                 else if(arr[i][j] != 0)
                     box.innerHTML = arr[i][j];
                 switch(arr[i][j]){
-                    case 1: box.style.color = "#0000FF"; break;
-                    case 2: box.style.color = "#008000"; break;
-                    case 3: box.style.color = "#FF0000"; break;
-                    case 4: box.style.color = "#000080"; break;
-                    case 5: box.style.color = "#800000"; break;
-                    case 6: box.style.color = "#008080"; break;
-                    case 7: box.style.color = "#000000"; break;
-                    case 8: box.style.color = "#808080"; break;
+                    // case 1: box.style.color = "#0000FF"; break;
+                    // case 2: box.style.color = "#008000"; break;
+                    // case 3: box.style.color = "#FF0000"; break;
+                    // case 4: box.style.color = "#000080"; break;
+                    // case 5: box.style.color = "#800000"; break;
+                    // case 6: box.style.color = "#008080"; break;
+                    // case 7: box.style.color = "#000000"; break;
+                    // case 8: box.style.color = "#808080"; break;
+                    case 1: box.style.color = "#7cc7ff"; break;
+                    case 2: box.style.color = "#66c266"; break;
+                    case 3: box.style.color = "#ff7788"; break;
+                    case 4: box.style.color = "#ee88ff"; break;
+                    case 5: box.style.color = "#ddaa22"; break;
+                    case 6: box.style.color = "#00cccc"; break;
+                    case 7: box.style.color = "#ff4444"; break;
+                    case 8: box.style.color = "#bbbbbb"; break;
                 }
                 box.addEventListener("mouseup", () => {
                     if(gameOver || gameWon) return;
@@ -187,20 +196,20 @@
         if(gameOver || gameWon || firstT) return;
         flagEnabled = !flagEnabled;
         if(!flagEnabled)
-            flag.style.backgroundColor = "rgb(186, 186, 186)";
+            flag.style.backgroundColor = "#4c545c";
         else
-            flag.style.backgroundColor = "red";
+            flag.style.backgroundColor = "#ee6666";
     }
     function HandleFlag(box){
         if(gameOver || gameWon || firstT) return;
         if(box.classList.contains("revealed")) return ;
         if(box.classList.contains("flagged")){
             box.classList.remove("flagged");
-            box.style.backgroundColor = "rgb(186, 186, 186)"
+            box.style.backgroundColor = "#4c545c"
             mC++; UpdateCounter();
         } else {
             box.classList.add("flagged");
-            box.style.backgroundColor = "red";
+            box.style.backgroundColor = "#ee6666";
             mC--; UpdateCounter();
         }
     }
